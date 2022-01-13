@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Diagnostics;
 
 namespace Pedang_WPF
 {
@@ -17,6 +18,7 @@ namespace Pedang_WPF
         public void HitungKerusakan()
         {
             Kerusakan = (int)(Roll * PengaliAjaib) + LUKA_DASAR + RusakTerbakar;
+            Debug.WriteLine($"CalculateDamage finished: {Kerusakan} (roll: {Roll})");
 
         }
 
@@ -31,6 +33,7 @@ namespace Pedang_WPF
                 PengaliAjaib = 1M;
             }
             HitungKerusakan();
+            Debug.WriteLine($"SetMagic finished: {Kerusakan} (roll: {Roll})");
         }
 
         public void AturNyalaApi(bool Nyala)
@@ -40,6 +43,7 @@ namespace Pedang_WPF
             {
                 Kerusakan += LUKA_BAKAR;
             }
+            Debug.WriteLine($"SetFlaming finished: {Kerusakan} (roll: {Roll})");
         }
 
 
