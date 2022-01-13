@@ -20,9 +20,59 @@ namespace Pedang_WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        Random ngacak = new Random();
+        KerusakanPedang kped = new KerusakanPedang();
+
         public MainWindow()
         {
             InitializeComponent();
+            kped.AturKeajaiban(false);
+            kped.AturNyalaApi(false);
+            LemparDadu();
+
+        }
+
+        public void LemparDadu()
+        {
+            kped.Roll = ngacak.Next(1, 7) + ngacak.Next(1, 7) + ngacak.Next(1, 7);
+            kped.AturNyalaApi(flaming.IsChecked.Value);
+            kped.AturKeajaiban(magic.IsChecked.Value);
+            DisplayKerusakan();
+        }
+
+        void DisplayKerusakan()
+        {
+            //damage is variable from Textblock's XAML
+            damage.Text = "Rolled " + kped.Roll + " for " + kped.Kerusakan + " HP";
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            LemparDadu();
+        }
+
+        private void Flaming_Checked(object sender, RoutedEventArgs e)
+        {
+            kped.AturNyalaApi(true);
+            DisplayKerusakan();
+        }
+
+        private void Flaming_Unchecked(object sender, RoutedEventArgs e)
+        {
+            kped.AturNyalaApi(false);
+            DisplayKerusakan();
+        }
+
+        private void Magic_Checked(object sender, RoutedEventArgs e)
+        {
+            kped.AturKeajaiban(true);
+            DisplayKerusakan();
+        }
+
+        private void Magic_Unchecked(object sender, RoutedEventArgs e)
+        {
+            kped.AturKeajaiban(false);
+            DisplayKerusakan();
         }
     }
 }
